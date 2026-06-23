@@ -1,8 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card.tsx"
+import { formatCurrency } from "@/lib/utils.ts"
 
 interface Props {
   titular: string
-  balance: string
+  balance: number
   currency: string
 }
 
@@ -23,7 +24,9 @@ function BalanceCard({ titular, balance, currency }: Props) {
 
           <div>
             <p className="font-semibold opacity-75">Balance:</p>
-            <p className="text-lg font-semibold">{balance}</p>
+            <p className="text-lg font-semibold">
+              ${formatCurrency(balance, currency)}
+            </p>
           </div>
         </div>
 
