@@ -1,8 +1,10 @@
+import BalanceCard from "@/components/balance-card/BalanceCard.tsx"
+
 function Home() {
   return (
-    <>
-      <h1>Home</h1>
-    </>
+    <section className="mx-auto w-full max-w-lg">
+      <BalanceCard titular="Breimer E. Correa T." balance="$ 50,700.00" currency="USD" />
+    </section>
   )
 }
 
