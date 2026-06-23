@@ -23,7 +23,7 @@ function CreateTransferForm() {
     <form id="create-transfer-form" className="flex flex-col gap-4" onSubmit={submit}>
       <FieldInput
         label="Value"
-        placeholder="0.00"
+        placeholder="1000"
         type="number"
         errorMessage={errors.value?.message}
         {...register("value")}
@@ -38,7 +38,7 @@ function CreateTransferForm() {
 
       <FieldInput
         label="Payeer Document"
-        placeholder="123.456.789-0"
+        placeholder="1234567890"
         errorMessage={errors.payeerDocument?.message}
         {...register("payeerDocument")}
       />
