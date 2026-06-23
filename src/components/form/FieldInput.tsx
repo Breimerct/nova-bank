@@ -5,7 +5,7 @@ import { Eye, EyeOff } from "lucide-react"
 import { cn } from "@/lib/utils.ts"
 
 interface Props extends ComponentProps<"input"> {
-  label: string
+  label?: string
   errorMessage?: string
 }
 
@@ -17,7 +17,9 @@ export const FieldInput = forwardRef<HTMLInputElement, Props>(
     return (
       <>
         <Field className="relative w-full gap-1!" data-invalid={!!errorMessage}>
-          <FieldLabel htmlFor={props.id}>{props.label}</FieldLabel>
+          {props.label && (
+            <FieldLabel htmlFor={props.id}>{props.label}</FieldLabel>
+          )}
           <Input
             ref={ref}
             type={showPass ? "text" : type}
