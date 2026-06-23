@@ -5,6 +5,10 @@ import {
   redirect,
 } from "react-router"
 
+import Home from "@/pages/home/Home.tsx"
+import MainLayout from "@/layouts/MainLayout.tsx"
+import Login from "@/pages/auth/Login.tsx"
+
 const publicRoutes = new Set(["/auth/login"])
 
 const authMiddleware: MiddlewareFunction = ({ request }) => {
@@ -25,25 +29,19 @@ const authMiddleware: MiddlewareFunction = ({ request }) => {
 export const routes = createBrowserRouter([
   {
     path: "/",
-    lazy: async () => ({
-      Component: (await import("../layouts/MainLayout.tsx")).default,
-    }),
+    element: <MainLayout />,
     middleware: [authMiddleware],
     children: [
       {
         index: true,
-        lazy: async () => ({
-          Component: (await import("../pages/home/Home.tsx")).default,
-        }),
+        element: <Home />,
       },
     ],
   },
   {
     path: "/auth/login",
     middleware: [authMiddleware],
-    lazy: async () => ({
-      Component: (await import("../pages/auth/Login.tsx")).default,
-    }),
+    element: <Login />,
   },
   {
     path: "*",
