@@ -16,7 +16,7 @@ pnpm install
 pnpm dev
 ```
 
-La aplicación se abrirá en `http://localhost:5173`
+La aplicación se abrirá en `http://localhost:3000`
 
 ### Ejecutar los tests
 
@@ -55,7 +55,7 @@ pnpm install
 pnpm dev
 ```
 
-A aplicação será aberta em `http://localhost:5173`
+A aplicação será aberta em `http://localhost:3000`
 
 ### Executar os testes
 
