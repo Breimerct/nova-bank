@@ -1,47 +1,36 @@
 # NovaBank
 
-Aplicación bancaria moderna con React, TypeScript y Vite.
+Aplicação bancária moderna com React, TypeScript e Vite.
 
-## Instalación
+## Instalação
 
 ```bash
 pnpm install
 ```
 
-## Ejecutar la aplicación
+## Executar a aplicação
 
 ```bash
 pnpm dev
 ```
 
-La aplicación se abrirá en `http://localhost:5173`
+A aplicação será aberta em `http://localhost:5173`
 
-## Ejecutar los tests
+## Rodar os testes
 
 ```bash
-# Ejecutar tests una sola vez
+# Executar testes uma única vez
 pnpm test
 
-# Ejecutar tests en modo watch
+# Executar testes em modo watch
 pnpm test:watch
 
-# Ejecutar tests con cobertura
+# Executar testes com cobertura
 pnpm test:coverage
 ```
 
-## Build para producción
+## Build para produção
 
 ```bash
 pnpm build
 ```
-
-## Stack Tecnológico
-
-- React 19 + TypeScript
-- Vite
-- Tailwind CSS
-- shadcn/ui
-- Zustand (estado global)
-- React Hook Form + Yup (formularios)
-- Jest + React Testing Library (testing)
-- Axios (HTTP client)
