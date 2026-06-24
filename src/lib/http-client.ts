@@ -11,7 +11,7 @@ const baseConfig: AxiosRequestConfig = {
   },
 }
 
-export const httpClient = axios.create({ ...baseConfig, adapter: "fetch" })
+export const httpClient = axios.create({ ...baseConfig })
 
 httpClient.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
