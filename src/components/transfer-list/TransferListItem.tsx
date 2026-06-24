@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import type { TransferType } from "@/types/transfer.type.ts"
-import { formatCurrency } from "@/lib/utils.ts"
+import { extractInitials, formatCurrency } from "@/lib/utils.ts"
 
 interface TransferListItemProps {
   transfer: TransferType
@@ -13,7 +13,9 @@ function TransferListItem({ transfer }: TransferListItemProps) {
       <li className="flex flex-row items-center justify-between">
         <div className="flex flex-row items-center gap-3">
           <Avatar>
-            <AvatarFallback>BC</AvatarFallback>
+            <AvatarFallback>
+              {extractInitials(transfer.payeer.name)}
+            </AvatarFallback>
           </Avatar>
           <div>
             <p className="font-medium">{transfer.payeer.name}</p>
@@ -28,7 +30,8 @@ function TransferListItem({ transfer }: TransferListItemProps) {
         </div>
 
         <div className="font-medium text-red-500 dark:text-red-400">
-          - {transfer.currency} ${formatCurrency(transfer.value, transfer.currency)}
+          - {transfer.currency} $
+          {formatCurrency(transfer.value, transfer.currency)}
         </div>
       </li>
     </Card>
