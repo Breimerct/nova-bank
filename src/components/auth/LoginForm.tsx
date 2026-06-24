@@ -6,8 +6,12 @@ import { FieldInput } from "@/components/form/FieldInput.tsx"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginSchema } from "@/schemas/auth/login.schema.ts"
+import { useAuthStore } from "@/stores/auth/auth.store.ts"
+import { LoaderCircle, LogIn } from "lucide-react"
 
 function LoginForm() {
+  const { login, loadingLogin } = useAuthStore()
+
   const {
     register,
     handleSubmit,
@@ -16,8 +20,8 @@ function LoginForm() {
     resolver: yupResolver(loginSchema),
   })
 
-  const submit = handleSubmit((data) => {
-    console.log(data)
+  const submit = handleSubmit(async (data) => {
+    await login(data)
   })
 
   return (
@@ -29,6 +33,7 @@ function LoginForm() {
           type="email"
           placeholder="Email"
           errorMessage={errors.email?.message}
+          disabled={loadingLogin}
           {...register("email")}
         />
 
@@ -38,13 +43,21 @@ function LoginForm() {
           type="password"
           placeholder="Password"
           errorMessage={errors.password?.message}
+          disabled={loadingLogin}
           {...register("password")}
         />
 
         <Separator className="my-2" />
 
         <Field orientation="responsive">
-          <Button type="submit">Login</Button>
+          <Button type="submit">
+            {loadingLogin ? (
+              <LoaderCircle className="h-4 w-4 animate-spin" />
+            ) : (
+              <LogIn className="h-4 w-4" />
+            )}
+            {loadingLogin ? "Loading..." : "Login"}
+          </Button>
         </Field>
       </form>
     </>
