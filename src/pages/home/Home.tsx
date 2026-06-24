@@ -10,7 +10,7 @@ import { useEffect } from "react"
 import { useAuthStore } from "@/stores/auth/auth.store.ts"
 
 function Home() {
-  const { fetchTransfer, transfers } = useTransferStore()
+  const { fetchTransfer, transfers, isLoadingTransfers } = useTransferStore()
   const { user } = useAuthStore()
 
   useEffect(() => {
@@ -50,7 +50,10 @@ function Home() {
 
         <TransferFilter />
 
-        <TransferList transfersList={transfers} />
+        <TransferList
+          transfersList={transfers}
+          isLoading={isLoadingTransfers}
+        />
       </article>
     </section>
   )

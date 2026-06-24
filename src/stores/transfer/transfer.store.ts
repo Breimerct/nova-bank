@@ -5,15 +5,19 @@ import { groupTransfersByDate } from "@/lib/utils.ts"
 
 type TransferState = {
   transfers: Record<string, TransferType[]>
+  isLoadingTransfers: boolean
 }
 
 type TransferActions = {
   setTransfers: (transfers: Record<string, TransferType[]>) => void
-  fetchTransfer: () => Promise<boolean>
+  setIsLoadingTransfer: (isLoading: boolean) => void
+
+  fetchTransfer: () => Promise<void>
 }
 
 const initialValues: TransferState = {
   transfers: {},
+  isLoadingTransfers: false,
 }
 
 const transferService = TransferService.getInstance()
@@ -23,18 +27,21 @@ export const useTransferStore = create<TransferState & TransferActions>()(
     ...initialValues,
 
     setTransfers: (transfers) => set({ transfers }),
+    setIsLoadingTransfer: (isLoading) => set({ isLoadingTransfers: isLoading }),
 
     fetchTransfer: async () => {
       const _this = get()
-      const response = await transferService.fetchTransfers()
+      try {
+        _this.setIsLoadingTransfer(true)
+        const response = await transferService.fetchTransfers()
 
-      if (response.data) {
-        const transfersByDate = groupTransfersByDate(response.data.transfers)
-        _this.setTransfers(transfersByDate)
-        return true
+        if (response.data) {
+          const transfersByDate = groupTransfersByDate(response.data.transfers)
+          _this.setTransfers(transfersByDate)
+        }
+      } finally {
+        _this.setIsLoadingTransfer(false)
       }
-
-      return false
     },
   })
 )
