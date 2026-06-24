@@ -15,6 +15,10 @@
     {
       "source": "/default/transferList",
       "destination": "https://n0qaa2fx3c.execute-api.us-east-1.amazonaws.com"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
