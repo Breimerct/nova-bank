@@ -5,12 +5,22 @@ import TransferList from "@/components/transfer-list/TransferList.tsx"
 import TransferFilter from "@/components/trasnfer-filter/TransferFilter.tsx"
 import SidePanel from "@/components/side-panel/SidePanel.tsx"
 import CreateTransferForm from "@/components/create-transfer/CreateTransferForm.tsx"
+import { useTransferStore } from "@/stores/transfer/transfer.store.ts"
+import { useEffect } from "react"
+import { useAuthStore } from "@/stores/auth/auth.store.ts"
 
 function Home() {
+  const { fetchTransfer, transfers } = useTransferStore()
+  const { user } = useAuthStore()
+
+  useEffect(() => {
+    fetchTransfer()
+  }, [fetchTransfer])
+
   return (
     <section className="mx-auto w-full max-w-lg">
       <BalanceCard
-        titular="Breimer E. Correa T."
+        titular={user?.name || "N/A"}
         balance={50700}
         currency="USD"
       />
@@ -40,7 +50,7 @@ function Home() {
 
         <TransferFilter />
 
-        <TransferList transfersList={{}} />
+        <TransferList transfersList={transfers} />
       </article>
     </section>
   )
