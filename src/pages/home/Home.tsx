@@ -8,21 +8,25 @@ import CreateTransferForm from "@/components/create-transfer/CreateTransferForm.
 import { useTransferStore } from "@/stores/transfer/transfer.store.ts"
 import { useEffect } from "react"
 import { useAuthStore } from "@/stores/auth/auth.store.ts"
+import { useBalanceStore } from "@/stores/balance/balance.store.ts"
 
 function Home() {
   const { fetchTransfer, transfers, isLoadingTransfers } = useTransferStore()
   const { user } = useAuthStore()
+  const { fetchBalance, balance, isLoadingBalance } = useBalanceStore()
 
   useEffect(() => {
     fetchTransfer()
-  }, [fetchTransfer])
+    fetchBalance()
+  }, [fetchTransfer, fetchBalance])
 
   return (
     <section className="mx-auto w-full max-w-lg">
       <BalanceCard
         titular={user?.name || "N/A"}
-        balance={50700}
-        currency="USD"
+        balance={balance.accountBalance}
+        currency={balance.currency}
+        isLoading={isLoadingBalance}
       />
 
       <article className="mt-8">
