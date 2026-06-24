@@ -6,3 +6,8 @@ export type TransferType = {
   currency: string
   payeer: PayeerType
 }
+
+export type TransferResponseType = {
+  message: string
+  transfers: TransferType[]
+}
