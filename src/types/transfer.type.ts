@@ -11,3 +11,10 @@ export type TransferResponseType = {
   message: string
   transfers: TransferType[]
 }
+
+export type CreateTransferType = {
+  value: number
+  currency: string
+  payeerDocument: string
+  transferDate: string
+}

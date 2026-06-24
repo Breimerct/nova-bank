@@ -1,5 +1,8 @@
 import { BaseService } from "@/services/common/base.service.ts"
-import type { TransferResponseType } from "@/types/transfer.type.ts"
+import type {
+  CreateTransferType,
+  TransferResponseType,
+} from "@/types/transfer.type.ts"
 
 export class TransferService extends BaseService {
   private static instance: TransferService
@@ -18,5 +21,9 @@ export class TransferService extends BaseService {
 
   async fetchTransfers() {
     return await this.get<TransferResponseType>("/transferList")
+  }
+
+  async createTransfer(createTransfer: CreateTransferType) {
+    return await this.post<{ status: string }>("/transfer", createTransfer)
   }
 }

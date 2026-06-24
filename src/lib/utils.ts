@@ -25,6 +25,8 @@ export function groupTransfersByDate(
 }
 
 export function formatCurrency(value: number, locale = "es-CO"): string {
+  if (!value) return "0"
+
   return new Intl.NumberFormat(locale, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -47,14 +49,14 @@ export function extractMessageError(error: unknown): string {
   return "Unknown error"
 }
 
-export function extractInitials(fullName: string) {
+export function extractInitials(fullName: string): string {
   if (!fullName) return "N/A"
 
   const [name, lastname] = fullName.split(" ")
   return `${name[0]}${lastname[0]}`.toUpperCase()
 }
 
-export function configureAuthHeader(proxy: HttpProxy.ProxyServer) {
+export function configureAuthHeader(proxy: HttpProxy.ProxyServer): void {
   proxy.on("proxyReq", (proxyReq: ClientRequest, req: IncomingMessage) => {
     const authHeader = req.headers["authorization"]
 

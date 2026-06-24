@@ -17,6 +17,8 @@ interface CreateTransferContentProps {
   content: ReactNode
   title: string
   description?: string
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
 }
 
 function SidePanel({
@@ -25,9 +27,11 @@ function SidePanel({
   content,
   title,
   description,
+  open,
+  onOpenChange
 }: CreateTransferContentProps) {
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>{buttonTrigger}</SheetTrigger>
       <SheetContent>
         <SheetHeader>

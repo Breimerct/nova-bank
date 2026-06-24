@@ -3,6 +3,7 @@ import { Toaster } from "sileo"
 import { useEffect } from "react"
 import { useAuthStore } from "@/stores/auth/auth.store.ts"
 import { useThemeStore } from "@/stores/theme/theme.store.ts"
+import { createPortal } from "react-dom"
 
 export function AppLayout() {
   const { token } = useAuthStore()
@@ -21,13 +22,18 @@ export function AppLayout() {
     }
   }, [token, navigate, initTheme, currentTheme])
 
+  const toast = createPortal(
+    <Toaster
+      position="top-center"
+      theme={currentTheme}
+      options={{ duration: 4000 }}
+    />,
+    document.body
+  )
+
   return (
     <main className="w-full">
-      <Toaster
-        position="top-center"
-        theme={currentTheme}
-        options={{ duration: 4000 }}
-      />
+      {toast}
       <Outlet />
     </main>
   )
